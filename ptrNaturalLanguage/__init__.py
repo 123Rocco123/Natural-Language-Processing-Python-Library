@@ -6,3 +6,6 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     # Array contains the titles of the stock that the user has selected
     articleTitles = [x for x in ptrFinance.returnMostRecentArticles(stockName) if x != ""]
 
+    # Array used to contain the articles that meet the requirements
+    returnArticles = []
+
