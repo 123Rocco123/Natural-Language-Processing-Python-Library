@@ -9,3 +9,9 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     # Array used to contain the articles that meet the requirements
     returnArticles = []
 
+    # First for loop used to iterate over the article title array
+    for x in articleTitles:
+        # For loop used to iterate and check if the keywords in the array are inside of the title
+        for keywords in keyWordsArr:
+            if keywords in x:
+                returnArticles.append(x)
