@@ -15,3 +15,5 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
         for keywords in keyWordsArr:
             if keywords in x:
                 returnArticles.append(x)
+
+    return returnArticles
