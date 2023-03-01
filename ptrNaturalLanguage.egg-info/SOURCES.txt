@@ -1,0 +1,11 @@
+CHANGELOG.txt
+LICENCE.txt
+MANIFEST.in
+README.txt
+setup.py
+ptrNaturalLanguage/__init__.py
+ptrNaturalLanguage.egg-info/PKG-INFO
+ptrNaturalLanguage.egg-info/SOURCES.txt
+ptrNaturalLanguage.egg-info/dependency_links.txt
+ptrNaturalLanguage.egg-info/top_level.txt
+ptrNaturalLanguage/__pycache__/repetitionFunction.cpython-310.pyc
