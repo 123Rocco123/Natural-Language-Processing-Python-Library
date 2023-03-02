@@ -24,3 +24,6 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
                 returnArticles.append(articleTitles.index(x))
 
     return returnArticles
+    # Contains the links to all of the articles for the specified stock
+    links = ptrFinance.returnWebArticles(stockName)
+
