@@ -21,6 +21,6 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
         # For loop used to iterate and check if the keywords in the array are inside of the title
         for keywords in keyWordsArr:
             if keywords in x:
-                returnArticles.append(x)
+                returnArticles.append(articleTitles.index(x))
 
     return returnArticles
