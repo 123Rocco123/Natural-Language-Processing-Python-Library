@@ -1,15 +1,19 @@
 Metadata-Version: 2.1
 Name: ptrNaturalLanguage
-Version: 0.0.1
+Version: 0.0.2
 Summary: Natural Language Processing Library
-Home-page: 
+Home-page: UNKNOWN
 Author: Rocco Pio Maria Petruccio
 Author-email: whatsappbackuprocco@gmail.com
 License: MIT
-Keywords: Artificial Intelligence,Natural Language Processing
+Keywords: Artificial Intelligence,Natural Language Processing,bs4,requests,requests_html
+Platform: UNKNOWN
 Classifier: Development Status :: 5 - Production/Stable
 Classifier: Intended Audience :: Science/Research
 Classifier: Operating System :: Microsoft :: Windows :: Windows 10
 Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
 License-File: LICENCE.txt
+
+UNKNOWN
+
