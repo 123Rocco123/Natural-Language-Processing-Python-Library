@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
   name='ptrNaturalLanguage',
-  version='0.0.1',
+  version='0.0.2',
   description='Natural Language Processing Library',
   #long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',
@@ -18,7 +18,7 @@ setup(
   author_email='whatsappbackuprocco@gmail.com',
   license='MIT',
   classifiers=classifiers,
-  keywords=["Artificial Intelligence", "Natural Language Processing"],
+  keywords=["Artificial Intelligence", "Natural Language Processing", "bs4", "requests", "requests_html"],
   packages=find_packages(),
   install_requires=[]
 )
