@@ -23,7 +23,6 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
             if keywords in x:
                 returnArticles.append(articleTitles.index(x))
 
-    return returnArticles
     # Contains the links to all of the articles for the specified stock
     links = ptrFinance.returnWebArticles(stockName)
 
@@ -35,4 +34,6 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     for x in returnArticles:
         returnTitles.append(articleTitles[x])
         returnLinks.append(links[x])
+
+    return returnTitles, returnLinks
 
