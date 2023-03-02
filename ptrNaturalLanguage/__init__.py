@@ -31,3 +31,8 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     returnTitles = []
     returnLinks = []
 
+    # For loop used to append all of the articles that meet the speicifed restrictions
+    for x in returnArticles:
+        returnTitles.append(articleTitles[x])
+        returnLinks.append(links[x])
+
