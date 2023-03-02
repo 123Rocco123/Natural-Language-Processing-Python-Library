@@ -27,3 +27,7 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     # Contains the links to all of the articles for the specified stock
     links = ptrFinance.returnWebArticles(stockName)
 
+    # Arrays used to contain the article headlines and links to articles respectively
+    returnTitles = []
+    returnLinks = []
+
