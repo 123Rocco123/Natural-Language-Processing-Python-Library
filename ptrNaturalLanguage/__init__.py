@@ -1,5 +1,12 @@
 import ptrFinance
 
+# Used to make requests to an HTML webpage so that we can get the information back
+import requests
+# Used to import the module allowing us to make HTML requests to webpages
+from requests_html import HTMLSession
+# Import module for web scraping
+from bs4 import BeautifulSoup
+
 # Function Used for Strings
     # Parameters are the stock name and the string array containg the titles of the articles
 def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
