@@ -37,3 +37,5 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
 
     return returnTitles, returnLinks
 
+# Function used to read websites, and see if they match criteria
+def webiteSearch(keyWordsArr, articleLinkArr):
