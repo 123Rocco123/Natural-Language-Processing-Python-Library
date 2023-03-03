@@ -39,3 +39,10 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
 
 # Function used to read websites, and see if they match criteria
 def webiteSearch(keyWordsArr, articleLinkArr):
+    for x in articleLinkArr:
+        session = HTMLSession()
+        requests = session.get(x).text
+
+        soup = BeautifulSoup(requests, "html5lib")
+
+        print(x)
