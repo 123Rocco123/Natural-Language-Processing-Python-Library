@@ -38,7 +38,9 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     return returnTitles, returnLinks
 
 # Function used to read websites, and see if they match criteria
-def webiteSearch(keyWordsArr, articleLinkArr):
+    # keyWordsArr - The parameter is used contain the keywords the user specifies
+    # articleLinkArr - The parameter contains the links to the articles that the user chooses
+def websiteSearch(keyWordsArr, articleLinkArr):
     for x in articleLinkArr:
         session = HTMLSession()
         requests = session.get(x).text
