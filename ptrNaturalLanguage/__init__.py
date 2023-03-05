@@ -41,6 +41,9 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     # keyWordsArr - The parameter is used contain the keywords the user specifies
     # articleLinkArr - The parameter contains the links to the articles that the user chooses
 def websiteSearch(keyWordsArr, articleLinkArr):
+    # Dicationary used to store the sentances of the website that match the keywords
+    keywordDic = {}
+    
     for x in articleLinkArr:
         session = HTMLSession()
         requests = session.get(x).text
