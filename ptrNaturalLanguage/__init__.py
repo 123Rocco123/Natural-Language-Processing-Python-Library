@@ -43,7 +43,7 @@ def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
 def websiteSearch(keyWordsArr, articleLinkArr):
     # Dicationary used to store the sentances of the website that match the keywords
     keywordDic = {}
-    
+
     for x in articleLinkArr:
         session = HTMLSession()
         requests = session.get(x).text
@@ -63,5 +63,5 @@ def websiteSearch(keyWordsArr, articleLinkArr):
                     # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
                     keywordDic[keywords].append(paragraphs)
 
+    # Return dictionary with keywords
     return keywordDic
-
