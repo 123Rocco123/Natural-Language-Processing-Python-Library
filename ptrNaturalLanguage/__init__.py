@@ -55,7 +55,12 @@ def websiteSearch(keyWordsArr, articleLinkArr):
         # The result variable contains the text of the paragraphs
         result = [paragraphs.text for paragraphs in result]
         # For loop used to check if the keywords are in the website's paragraphs
-        for paragraphs in result:
-            for keywords in keyWordsArr:
+        for keywords in keyWordsArr:
+            # Adding the new keyword into the dictionary
+            keywordDic[keywords] = []
+            for paragraphs in result:
                 if keywords in paragraphs:
+                    # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
+                    keywordDic[keywords].append(paragraphs)
+
 
