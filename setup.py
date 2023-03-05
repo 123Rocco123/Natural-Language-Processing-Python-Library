@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
   name='ptrNaturalLanguage',
-  version='0.0.2',
+  version='0.0.3',
   description='Natural Language Processing Library',
   #long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',
@@ -20,5 +20,5 @@ setup(
   classifiers=classifiers,
   keywords=["Artificial Intelligence", "Natural Language Processing", "bs4", "requests", "requests_html"],
   packages=find_packages(),
-  install_requires=[]
+  install_requires=["ptrFinance"]
 )
