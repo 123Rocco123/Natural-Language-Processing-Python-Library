@@ -54,10 +54,8 @@ def websiteSearch(keyWordsArr, articleLinkArr):
         result = soup.findAll("p")
         # The result variable contains the text of the paragraphs
         result = [paragraphs.text for paragraphs in result]
-        key = 0
         # For loop used to check if the keywords are in the website's paragraphs
         for paragraphs in result:
             for keywords in keyWordsArr:
                 if keywords in paragraphs:
-                    key += 1
 
