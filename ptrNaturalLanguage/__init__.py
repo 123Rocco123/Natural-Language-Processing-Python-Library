@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 # Function Used to find the articles that contain the keywords in their titles, returning the titles with the links - O(n^2)
     # Parameters are the stock name and the string array containg the titles of the articles
-def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
+def stringCheckFunc(stockName, keyWordsArr = []):
     # Array contains the titles of the stock that the user has selected
     articleTitles = [x for x in ptrFinance.returnMostRecentArticles(stockName) if x != ""]
 
