@@ -63,5 +63,7 @@ def websiteSearch(stockName, keyWordsArr, articleLinkArr):
                     # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
                     keywordDic[keywords].append(paragraphs)
 
+        articleDictionary[list(namesOfArticles.keys())[list(namesOfArticles.values()).index(x)]] = keywordDic
+
     # Return dictionary with keywords
-    return keywordDic
+    return articleDictionary
