@@ -7,7 +7,7 @@ from requests_html import HTMLSession
 # Import module for web scraping
 from bs4 import BeautifulSoup
 
-# Function Used for Strings
+# Function Used to find the articles that contain the keywords in their titles, returning the titles with the links - O(n^2)
     # Parameters are the stock name and the string array containg the titles of the articles
 def stringCheckFunc(stockName, keyWordsArr = [], stringArr = []):
     # Array contains the titles of the stock that the user has selected
