@@ -32,9 +32,14 @@ def stringCheckFunc(stockName, keyWordsArr = []):
 # Function used to read websites, and see if they match criteria
     # keyWordsArr - The parameter is used contain the keywords the user specifies
     # articleLinkArr - The parameter contains the links to the articles that the user chooses
-    # Dicationary used to store the sentances of the website that match the keywords
-    keywordDic = {}
 def websiteSearch(stockName, keyWordsArr, articleLinkArr):
+    # Dictionary used to store the article with its returned values
+    articleDictionary = {}
+
+    # Variable contains a dictionary with the title of the artilces, and their respecitve links
+    articlesWithLinks = stringCheckFunc(stockName, keyWordsArr)
+
+    namesOfArticles = ptrFinance.returnArticleAndLink(stockName)
 
     for x in articleLinkArr:
         session = HTMLSession()
