@@ -13,29 +13,21 @@ def stringCheckFunc(stockName, keyWordsArr = []):
     # Array contains the titles of the stock that the user has selected
     articleTitles = [x for x in ptrFinance.returnMostRecentArticles(stockName) if x != ""]
 
-    # Array used to contain the articles that meet the requirements
-    returnArticles = []
+    # Contains the links to all of the articles for the specified stock
+    links = ptrFinance.returnWebArticles(stockName)
+
+    # Dictionary used to contain the articles and their links that meet the requirements
+    returnArticles = {}
 
     # First for loop used to iterate over the article title array
     for x in articleTitles:
         # For loop used to iterate and check if the keywords in the array are inside of the title
         for keywords in keyWordsArr:
             if keywords in x:
-                returnArticles.append(articleTitles.index(x))
+                returnArticles[x] = links[articleTitles.index(x)]
 
-    # Contains the links to all of the articles for the specified stock
-    links = ptrFinance.returnWebArticles(stockName)
-
-    # Arrays used to contain the article headlines and links to articles respectively
-    returnTitles = []
-    returnLinks = []
-
-    # For loop used to append all of the articles that meet the speicifed restrictions
-    for x in returnArticles:
-        returnTitles.append(articleTitles[x])
-        returnLinks.append(links[x])
-
-    return returnTitles, returnLinks
+    # The return statement will return the dictionary containig the titles of the website and their links
+    return returnArticles
 
 # Function used to read websites, and see if they match criteria
     # keyWordsArr - The parameter is used contain the keywords the user specifies
