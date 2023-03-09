@@ -42,6 +42,9 @@ def websiteSearch(stockName, keyWordsArr, articleLinkArr):
     namesOfArticles = ptrFinance.returnArticleAndLink(stockName)
 
     for x in articleLinkArr:
+        # Dicationary used to store the sentances of the website that match the keywords
+        keywordDic = {}
+
         session = HTMLSession()
         requests = session.get(x).text
 
