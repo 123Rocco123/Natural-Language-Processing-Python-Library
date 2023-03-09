@@ -1,5 +1,9 @@
 Change Log
 ==========
+0.0.4 (3/9/2023)
+----------------
+websiteSearch function return type change
+
 0.0.3 (3/5/2023)
 ----------------
 websiteSearch function addition, used to return paragraphs in websites that match specified keywords
