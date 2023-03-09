@@ -22,8 +22,8 @@ def stringCheckFunc(stockName, keyWordsArr = []):
     # First for loop used to iterate over the article title array
     for x in articleTitles:
         # For loop used to iterate and check if the keywords in the array are inside of the title
-        for keywords.lower() in keyWordsArr:
-            if keywords in x.lower():
+        for keywords in keyWordsArr:
+            if keywords.lower() in x.lower():
                 returnArticles[x] = links[articleTitles.index(x)]
 
     # The return statement will return the dictionary containig the titles of the website and their links
