@@ -1,5 +1,9 @@
 Change Log
 ==========
+0.0.7 (3/11/2023)
+----------------
+websiteSearch function bug fix. The bug fixed was where there was a different link for the same article from the ptrFinance module called in the function, and the one passed in as a parameter.
+
 0.0.5 (3/9/2023)
 ----------------
 websiteSearch function bug fix
