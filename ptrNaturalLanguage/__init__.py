@@ -60,7 +60,7 @@ def websiteSearch(stockName, keyWordsArr):
                     # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
                     keywordDic[keywords].append(paragraphs)
 
-        # If-Else block used to remove all articles that don't have the keywords specified. 
+        # If-Else block used to remove all articles that don't have the keywords specified.
         if len(keywordDic) == 0:
             continue
         else:
