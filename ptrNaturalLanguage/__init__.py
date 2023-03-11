@@ -38,7 +38,7 @@ def websiteSearch(stockName, keyWordsArr):
     # Variable contains a dictionary with the title of the articles for the specified stock, and their respecitve links
     namesOfArticles = ptrFinance.returnArticleAndLink(stockName)
 
-    for x in articleLinkArr:
+    for x in namesOfArticles.values():
         # Dicationary used to store the sentances of the website that match the keywords
         keywordDic = {}
 
