@@ -10,7 +10,7 @@ classifiers = [
 
 setup(
   name='ptrNaturalLanguage',
-  version='0.0.5',
+  version='0.0.7',
   description='Natural Language Processing Library',
   #long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',
