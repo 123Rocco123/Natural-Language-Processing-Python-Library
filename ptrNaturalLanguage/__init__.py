@@ -35,9 +35,7 @@ def websiteSearch(stockName, keyWordsArr):
     # Dictionary used to store the article with its returned values
     articleDictionary = {}
 
-    # Variable contains a dictionary with the title of the artilces, and their respecitve links
-    articlesWithLinks = stringCheckFunc(stockName, keyWordsArr)
-
+    # Variable contains a dictionary with the title of the articles for the specified stock, and their respecitve links
     namesOfArticles = ptrFinance.returnArticleAndLink(stockName)
 
     for x in articleLinkArr:
