@@ -95,3 +95,5 @@ def specificWebsiteSearch(link, keyWordsArr):
                 # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
                 keywordDic[keywords].append(paragraphs)
 
+    # Return array with keywords
+    return keywordDic
