@@ -77,3 +77,12 @@ def specificWebsiteSearch(link, keyWordsArr):
     # Dicationary used to store the sentances of the website that match the keywords
     keywordDic = {}
 
+    session = HTMLSession()
+    requests = session.get(link).text
+
+    soup = BeautifulSoup(requests, "html5lib")
+
+    # Used to find all the paragraphs in the website, to check if the keywords are mentioned in them or not
+    result = soup.findAll("p")
+    # The result variable contains the text of the paragraphs
+    result = [paragraphs.text for paragraphs in result]
