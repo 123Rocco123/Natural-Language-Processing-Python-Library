@@ -10,9 +10,9 @@ classifiers = [
 
 setup(
   name='ptrNaturalLanguage',
-  version='0.0.7',
+  version='0.0.8',
   description='Natural Language Processing Library',
-  #long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
+  long_description=open('README.txt').read() + '\n\n' + open('CHANGELOG.txt').read(),
   url='',
   author='Rocco Pio Maria Petruccio',
   author_email='whatsappbackuprocco@gmail.com',
