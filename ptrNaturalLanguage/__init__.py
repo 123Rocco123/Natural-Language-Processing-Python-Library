@@ -71,3 +71,9 @@ def websiteSearch(stockName, keyWordsArr):
 
 # Function used to check for keywords in specified link
 def specificWebsiteSearch(link, keyWordsArr):
+    # Dictionary used to store the article with its returned values
+    articleDictionary = {}
+
+    # Dicationary used to store the sentances of the website that match the keywords
+    keywordDic = {}
+
