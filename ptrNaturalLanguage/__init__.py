@@ -68,3 +68,6 @@ def websiteSearch(stockName, keyWordsArr):
 
     # Return dictionary with keywords
     return articleDictionary
+
+# Function used to check for keywords in specified link
+def specificWebsiteSearch(link, keyWordsArr):
