@@ -86,3 +86,12 @@ def specificWebsiteSearch(link, keyWordsArr):
     result = soup.findAll("p")
     # The result variable contains the text of the paragraphs
     result = [paragraphs.text for paragraphs in result]
+    # For loop used to check if the keywords are in the website's paragraphs
+    for keywords in keyWordsArr:
+        for paragraphs in result:
+            if keywords in paragraphs:
+                # Adding the new keyword into the dictionary
+                keywordDic[keywords] = []
+                # If the paragraph contains the keyword that we're looking for, then we add it to its respective dictionary key
+                keywordDic[keywords].append(paragraphs)
+
