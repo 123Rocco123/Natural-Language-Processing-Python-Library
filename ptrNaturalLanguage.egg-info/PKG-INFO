@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ptrNaturalLanguage
-Version: 0.0.8
+Version: 0.0.9
 Summary: Natural Language Processing Library
 Home-page: 
 Author: Rocco Pio Maria Petruccio
@@ -14,13 +14,18 @@ Classifier: License :: OSI Approved :: MIT License
 Classifier: Programming Language :: Python :: 3
 License-File: LICENCE.txt
 
-The goal of the library is that of allowing developers to quickly and easily analyze finance text files and strings. 
+The goal of the library is that of allowing developers to quickly and easily analyze finance text files and strings.
 
 The functions in the package make use of ptrFinance to make and save the requests.
+
+GitHub Repository Link: https://github.com/123Rocco123/Natural-Language-Processing-Python-Library
 
 
 Change Log
 ==========
+0.0.9 (3/26/2023)
+stringKeywordFind function creation, uses a keyword array, and checks if its in an array - O(n)
+
 0.0.8 (3/19/2023)
 specificWebsiteSearch function creation, used to search for keywords in a specified website
 
