@@ -1,5 +1,8 @@
 Change Log
 ==========
+0.0.9 (3/26/2023)
+stringKeywordFind function creation, uses a keyword array, and checks if its in an array - O(n)
+
 0.0.8 (3/19/2023)
 specificWebsiteSearch function creation, used to search for keywords in a specified website
 
