@@ -97,3 +97,20 @@ def specificWebsiteSearch(link, keyWordsArr):
 
     # Return array with keywords
     return keywordDic
+
+# Function used to check for keywords in a string - O(n)
+    # "string" parameter is the string that we want searched
+    # "keyWordsArr" is the array containing the keywords that the user wants to check for in the string
+def stringKeywordFind(string, keyWordsArr):
+    # The dictionary is used to contain the keyword with either a true or false statement
+        # If its true, then the keyword is inside of the string
+    returnDic = {}
+
+    # For loop is used to iterate over the array to check for each keyword in the string
+    for x in keyWordsArr:
+        if x in string:
+            returnDic[x] = True
+        else:
+            returnDic[x] = False
+
+    return returnDic
