@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ptrNaturalLanguage
-Version: 0.0.9
+Version: 0.0.10
 Summary: Natural Language Processing Library
 Home-page: 
 Author: Rocco Pio Maria Petruccio
@@ -23,6 +23,10 @@ GitHub Repository Link: https://github.com/123Rocco123/Natural-Language-Processi
 
 Change Log
 ==========
+0.0.10 (3/27/2023)
+positiveOrNegativeString function creation, checks a string to see if its a positive or negative sentiment behind it - O(n)
+Its parameters are: The String, an array containing the positive keywords, and an array containing the negative keywords
+
 0.0.9 (3/26/2023)
 stringKeywordFind function creation, uses a keyword array, and checks if its in an array - O(n)
 
