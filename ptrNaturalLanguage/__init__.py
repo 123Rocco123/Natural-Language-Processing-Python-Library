@@ -114,3 +114,27 @@ def stringKeywordFind(string, keyWordsArr):
             returnDic[x] = False
 
     return returnDic
+
+# Function used to check if a string is positive or not - O(n)
+def positiveOrNegativeString(string, positiveArray, negativeArray):
+    # The variables are used to keep track of if the string is positive or not using a basic point system
+    positive = 0
+    negative = 0
+
+    # For loop is used to iterate over the array to check for each keyword in the string
+        # If its in there, then a point is added to the positive variable
+    for x in positiveArray:
+        if x in string:
+            positive += 1
+
+    for x in negative:
+        if x in string:
+            negative += 1
+
+    # The if else block below is used to check variables above, depending 
+    if positive > negative:
+        return "Positive"
+    elif negative > positive:
+        return "Negative"
+    else:
+        return "Neutral"
