@@ -127,11 +127,11 @@ def positiveOrNegativeString(string, positiveArray, negativeArray):
         if x in string:
             positive += 1
 
-    for x in negative:
+    for x in negativeArray:
         if x in string:
             negative += 1
 
-    # The if else block below is used to check variables above, depending 
+    # The if else block below is used to check variables above, depending
     if positive > negative:
         return "Positive"
     elif negative > positive:
