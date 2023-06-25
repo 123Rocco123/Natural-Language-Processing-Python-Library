@@ -144,3 +144,15 @@ def positiveOrNegativeString(string, positiveArray, negativeArray):
         return "Negative"
     else:
         return "Neutral"
+
+# Machine Learning Section
+
+# Function used for "sentence segmentation"
+    # AKA Splitting the sentances
+def sentenceSegmentation(inputText):
+    # Used to split up the inputted text into seperate sentances
+    seperatedText = inputText.split(".")
+    # Used to remove empty string from the returned array
+    seperatedText = [x for x in seperatedText if x != ""]
+    return seperatedText
+
