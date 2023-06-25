@@ -156,3 +156,30 @@ def sentenceSegmentation(inputText):
     seperatedText = [x for x in seperatedText if x != ""]
     return seperatedText
 
+# Function used for tokenization
+    # AKA splitting the sentances into words
+def tokenization(inputText):
+    stopWords = pd.read_csv("{currentDir}/ptrNaturalLanguage/stopWords.csv".format(currentDir = os.getcwd()))
+    stopWords = list(stopWords["Stop Words"])
+
+    for x in sentenceSegmentation(inputText):
+        # Used to split up the inputted text into seperate words
+        words = x.split(" ")
+        # Used to remove empty string from the returned array
+        words = [x for x in words if x != ""]
+
+        # Used to classify the words
+        for wordsToSearch in words:
+            # Condition is used to make sure that we get rid of the "stopWords"
+            if wordsToSearch in stopWords:
+                continue
+            else:
+                # Used to check for the word on the dictionary
+                session = HTMLSession()
+                requests = session.get("https://dictionary.cambridge.org/dictionary/english/{searchedWord}".format(searchedWord = wordsToSearch)).text
+                soup = BeautifulSoup(requests, "html5lib")
+
+                print(soup.find("span", {"class" : "pos dpos"}).text)
+
+tokenization("London is the capital and most populous city of England and the United Kingdom.")
+
