@@ -167,6 +167,9 @@ def tokenization(inputText):
         words = x.split(" ")
         # Used to remove empty string from the returned array
         words = [x for x in words if x != ""]
+        # Used to contain the words that passed the stopWords for loop
+        filteredWords = []
+        filteredWordsType = []
 
         # Used to classify the words
         for wordsToSearch in words:
