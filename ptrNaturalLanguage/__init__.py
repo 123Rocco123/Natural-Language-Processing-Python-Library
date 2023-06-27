@@ -182,7 +182,9 @@ def tokenization(inputText):
                 requests = session.get("https://dictionary.cambridge.org/dictionary/english/{searchedWord}".format(searchedWord = wordsToSearch)).text
                 soup = BeautifulSoup(requests, "html5lib")
 
-                print(soup.find("span", {"class" : "pos dpos"}).text)
+                filteredWords.append(wordsToSearch)
+                filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
+
 
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
