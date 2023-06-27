@@ -185,6 +185,7 @@ def tokenization(inputText):
                 filteredWords.append(wordsToSearch)
                 filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
 
+        print(filteredWords)
 
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
