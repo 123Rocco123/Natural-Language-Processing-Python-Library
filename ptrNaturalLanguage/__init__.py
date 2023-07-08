@@ -240,6 +240,10 @@ def tokenization(inputText):
                 filteredWords.append(wordsToSearch)
                 filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
 
+                del session
+                del requests
+                del soup
+
         # Variables used to contain the root of the sentance and the verbs
         verbs, root = findMainVerb(words)
 
