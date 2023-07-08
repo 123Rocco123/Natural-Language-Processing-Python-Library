@@ -264,5 +264,10 @@ def trainModel(data):
         for x in range(len(data)):
             writer.writerow[list(data.iloc[x])]
 
+# Function used to clear the training model CSV file
+    # This makes it so that it can then be re-used later for different NPL issues
+def clearTraining():
+    pass
+
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
