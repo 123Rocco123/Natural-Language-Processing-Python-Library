@@ -171,6 +171,25 @@ def lemmazation(wordsArray):
 
     return returnArray
 
+# Function has the goal of identifying the main verb of a sentence
+def findMainVerb(textArray):
+    # Used to open the csv file that contains the verbs
+    with open("{currentDir}/ptrNaturalLanguage/verbs.csv".format(currentDir = os.getcwd()), "r") as verbFile:
+        reader = csv.reader(verbFile)
+
+        # Used to contain the verbs that are in the input text
+        verbs = []
+
+        # For loop used to iterate over the verbs csv
+            # Used to identify elements as the dominant word
+        for x in reader:
+            if x[0] in textArray:
+                verbs.append(x[0])
+
+        # The two different returns are which of the elements are verbs in the string
+            # The second one returning the dominant verb
+        return verbs, verbs[0]
+
 # Function used for tokenization
     # AKA splitting the sentances into words
 def tokenization(inputText):
