@@ -252,5 +252,17 @@ def tokenization(inputText):
         # Pass in the training data to the function for classification of the sentence sentiment
         sentimentDetermination(filteredWords)
 
+# Function used to train the NPL model
+    # Data - Pandas DataFrame
+def trainModel(data):
+    # Pass the data into the training csv
+    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "a") as fileToAppendTo:
+        writer = csv.writer(fileToAppendTo)
+
+        # For loop used to iterate over the parameter containing the dataframe
+            # This will make it so that we write the user specified data to the training csv
+        for x in range(len(data)):
+            writer.writerow[list(data.iloc[x])]
+
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
