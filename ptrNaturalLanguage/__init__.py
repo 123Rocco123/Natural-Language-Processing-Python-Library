@@ -225,6 +225,10 @@ def tokenization(inputText):
                 filteredWords.append(wordsToSearch)
                 filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
 
+        # Variables used to contain the root of the sentance and the verbs
+        verbs, root = findMainVerb(words)
+
+        print(words)
         print(filteredWords)
 
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
