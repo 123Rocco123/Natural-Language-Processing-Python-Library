@@ -205,6 +205,12 @@ def tokenization(inputText):
         filteredWords = []
         filteredWordsType = []
 
+        # Used to move all of the words that we currently have in the array to their most basic form
+        lemmaOfWords = lemmazation(words)
+
+        for lemma in lemmaOfWords:
+            words[words.index(lemma)] = lemmaOfWords[lemma]
+
         # Used to classify the words
         for wordsToSearch in words:
             # Condition is used to make sure that we get rid of the "stopWords"
