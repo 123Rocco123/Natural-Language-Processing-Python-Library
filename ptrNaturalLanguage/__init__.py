@@ -156,6 +156,21 @@ def sentenceSegmentation(inputText):
     seperatedText = [x for x in seperatedText if x != ""]
     return seperatedText
 
+# Function used to change the words into their most basic form of the word
+def lemmazation(wordsArray):
+    # Used to contain the lemmanized words with thein non lemmanized versions
+    returnArray = {}
+
+    for word in wordsArray:
+        session = HTMLSession()
+        requests = session.get("https://dictionary.cambridge.org/dictionary/english/{word}".format(word = word)).text
+        soup = BeautifulSoup(requests, "html5lib")
+
+        if soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}) != None:
+            returnArray[word] = soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}).text
+
+    return returnArray
+
 # Function used for tokenization
     # AKA splitting the sentances into words
 def tokenization(inputText):
