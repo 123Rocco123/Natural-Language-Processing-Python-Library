@@ -196,6 +196,14 @@ def findSubject(wordsArray, filteredWords, positionOfRoot):
         if wordsArray.index(x) < positionOfRoot and x in filteredWords:
             return x
 
+# Function is used to return if the sentance is positive or negative
+def sentimentDetermination(wordsArray):
+    # Open function used to read the training data
+    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "r") as sentimentDeterminationTraining:
+        reader = csv.reader(sentimentDeterminationTraining)
+
+        for x in reader:
+            print(x)
 
 # Function used for tokenization
     # AKA splitting the sentances into words
