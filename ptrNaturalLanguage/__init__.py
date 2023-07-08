@@ -190,6 +190,10 @@ def findMainVerb(textArray):
             # The second one returning the dominant verb
         return verbs, verbs[0]
 
+# Function used to find the subject of the sentance
+def findSubject(textArray):
+    pass
+
 # Function used for tokenization
     # AKA splitting the sentances into words
 def tokenization(inputText):
