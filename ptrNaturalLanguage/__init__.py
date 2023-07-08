@@ -246,9 +246,11 @@ def tokenization(inputText):
 
         # Variables used to contain the root of the sentance and the verbs
         verbs, root = findMainVerb(words)
+        # Variable used to contain the subject of the sentance
+        subject = findSubject(words, filteredWords, words.index(root))
 
-        print(words)
-        print(filteredWords)
+        # Pass in the training data to the function for classification of the sentence sentiment
+        sentimentDetermination(filteredWords)
 
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
