@@ -191,8 +191,11 @@ def findMainVerb(textArray):
         return verbs, verbs[0]
 
 # Function used to find the subject of the sentance
-def findSubject(textArray):
-    pass
+def findSubject(wordsArray, filteredWords, positionOfRoot):
+    for x in wordsArray:
+        if wordsArray.index(x) < positionOfRoot and x in filteredWords:
+            return x
+
 
 # Function used for tokenization
     # AKA splitting the sentances into words
