@@ -267,7 +267,13 @@ def trainModel(data):
 # Function used to clear the training model CSV file
     # This makes it so that it can then be re-used later for different NPL issues
 def clearTraining():
-    pass
+    # Used to open the file and set it to its header values only
+        # It does this by using the "w+" write mode, truncating the file (bringing it to length 0)
+    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "w+") as resetFile:
+        writer = csv.writer(resetFile)
+
+        writer.writerow(['sentance','positive','negative','neutral'])
+
 
 tokenization("London is the capital and most populous city of England and the United Kingdom.")
 
