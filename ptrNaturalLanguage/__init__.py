@@ -282,7 +282,9 @@ def tokenization(inputText):
         # Used to split up the inputted text into seperate words
         words = x.split(" ")
         # Used to remove empty string from the returned array
-        words = [x for x in words if x != ""]
+            # We also make sure that there is no percentage in the word
+            # As well as making sure that we remove any and all strings that contain numbers as they can't feasibly have sentiment
+        words = [x for x in words if x != "" and "%" not in x and checkIfNumInString(x) == False]
         # Used to contain the words that passed the stopWords for loop
         filteredWords = []
         filteredWordsType = []
@@ -296,28 +298,40 @@ def tokenization(inputText):
         # Used to classify the words
         for wordsToSearch in words:
             # Condition is used to make sure that we get rid of the "stopWords"
-            if wordsToSearch in stopWords:
+            if wordsToSearch.lower() in stopWords:
                 continue
             else:
-                # Used to check for the word on the dictionary
-                session = HTMLSession()
-                requests = session.get("https://dictionary.cambridge.org/dictionary/english/{searchedWord}".format(searchedWord = wordsToSearch)).text
-                soup = BeautifulSoup(requests, "html5lib")
+                # Used in case there is some issue with connecting to the dictionary for any reason
+                try:
+                    # Used to check for the word on the dictionary
+                    session = HTMLSession()
+                    requests = session.get("https://dictionary.cambridge.org/dictionary/english/{searchedWord}".format(searchedWord = wordsToSearch)).text
+                    soup = BeautifulSoup(requests, "html5lib")
 
-                filteredWords.append(wordsToSearch)
-                filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
+                    try:
+                        filteredWords.append(wordsToSearch)
+                        filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
+                    except:
+                        pass
 
-                del session
-                del requests
-                del soup
+                    del session
+                    del requests
+                    del soup
+
+                except:
+                    continue
+
+        return filteredWords
 
         # Variables used to contain the root of the sentance and the verbs
-        verbs, root = findMainVerb(words)
+        #verbs, root = findMainVerb(words)
         # Variable used to contain the subject of the sentance
-        subject = findSubject(words, filteredWords, words.index(root))
+        #subject = findSubject(words, filteredWords, words.index(root))
 
         # Pass in the training data to the function for classification of the sentence sentiment
-        sentimentDetermination(filteredWords)
+        #sentimentDetermination(filteredWords)
+
+#tokenization("Tesla stock is overvalued")
 
 # Function used to train the NPL model
     # Data - Pandas DataFrame
@@ -341,6 +355,35 @@ def clearTraining():
 
         writer.writerow(['sentance','positive','negative','neutral'])
 
+# Function used to train the model
+    # dataFrame parameter is used to contain the CSV file with the string and the "supervised" column
+def train(dataFrame):
+    # Dictionary used to contain the word with its frequency and overall score
+    wordAndScore = {}
 
-tokenization("London is the capital and most populous city of England and the United Kingdom.")
+    # Used to iterate over the
+    for x in dataFrame.index:
+        print(dataFrame["sentance"][x])
+        for words in tokenization(dataFrame["sentance"][x]):
+            try:
+                if dataFrame["positive"][x] == 1:
+                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1] + 0.1]
 
+                    wordAndScore[words] = newArray
+
+                elif dataFrame["negative"][x] == 1:
+                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1] - 0.1]
+
+                    wordAndScore[words] = newArray
+
+                else:
+                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1]]
+
+                    wordAndScore[words] = newArray
+
+            except:
+                wordAndScore[words] = [1, 0.5]
+
+    print(wordAndScore)
+
+train(pd.read_csv("C:/Users/dodob/OneDrive/Desktop/GitHubFiles/Natural-Language-Processing-Python-Library/ptrNaturalLanguage/training.csv", encoding = "latin-1"))
