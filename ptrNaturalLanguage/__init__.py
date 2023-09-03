@@ -171,12 +171,22 @@ def lemmazation(wordsArray):
     returnArray = {}
 
     for word in wordsArray:
-        session = HTMLSession()
-        requests = session.get("https://dictionary.cambridge.org/dictionary/english/{word}".format(word = word)).text
-        soup = BeautifulSoup(requests, "html5lib")
+        try:
+            session = HTMLSession()
+            requests = session.get("https://dictionary.cambridge.org/dictionary/english/{word}".format(word = word)).text
+            soup = BeautifulSoup(requests, "html5lib")
 
-        if soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}) != None:
-            returnArray[word] = soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}).text
+            #print(word)
+
+            # Used in case of a stock name
+            try:
+                if soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}) != None:
+                    returnArray[word] = soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}).text
+            except:
+                pass
+                #print("test")
+        except:
+            continue
 
     return returnArray
 
