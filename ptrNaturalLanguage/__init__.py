@@ -221,12 +221,53 @@ def findSubject(wordsArray, filteredWords, positionOfRoot):
 
 # Function is used to return if the sentance is positive or negative
 def sentimentDetermination(wordsArray):
+    score = 0
+
+    for x in wordsArray:
+        for letters in x:
+            score += ord(letters)
+
+    scoreAndClassificationDF = pd.DataFrame(columns = ["Score", "Positive", "Negative", "Neutral"])
+
     # Open function used to read the training data
     with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "r") as sentimentDeterminationTraining:
         reader = csv.reader(sentimentDeterminationTraining)
+        next(reader)
 
         for x in reader:
-            print(x)
+            score = 0
+            for word in x[0].split(" "):
+                for letter in word:
+                    score += ord(letter)
+
+            # Appends the new row to the DataFrame
+            scoreAndClassificationDF = scoreAndClassificationDF.append({"Score" : score,
+                                                                        "Positive" : x[1],
+                                                                        "Negative" : x[2],
+                                                                        "Neutral" : x[3]
+                                                                        },
+
+                                                                        ignore_index = True)
+
+    x = scoreAndClassificationDF[["Score"]]
+    y = scoreAndClassificationDF[["Positive", "Neutral","Negative"]]
+
+    # Used to contain our test and train data
+    x_train, x_test, y_train, y_test = train_test_split(x,y,train_size=0.8, test_size=0.2)
+
+    # StandardScaler used to normalize the data
+    scaler = StandardScaler()
+    scaler.fit(x_train)
+
+    x_train = scaler.transform(x_train)
+    x_test = scaler.transform(x_test)
+
+    # Used to contain the algorithm for determining the nearest neighbor
+    classifier = KNeighborsClassifier(n_neighbors = 5)
+    classifier.fit(x_train, y_train)
+
+    #print(classifier.predict([[score]]))
+
 
 # Function used for tokenization
     # AKA splitting the sentances into words
