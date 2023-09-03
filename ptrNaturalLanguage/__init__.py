@@ -192,22 +192,26 @@ def lemmazation(wordsArray):
 
 # Function has the goal of identifying the main verb of a sentence
 def findMainVerb(textArray):
-    # Used to open the csv file that contains the verbs
-    with open("{currentDir}/ptrNaturalLanguage/verbs.csv".format(currentDir = os.getcwd()), "r") as verbFile:
-        reader = csv.reader(verbFile)
+    chrome_options = Options()
+    chrome_options.add_argument('--headless')
 
-        # Used to contain the verbs that are in the input text
-        verbs = []
+    # Function used to scrape information from the main page
+    driver = webdriver.Chrome(options = chrome_options)
+    # Used to contain the verbs that are in the input text
+    verbs = []
 
-        # For loop used to iterate over the verbs csv
-            # Used to identify elements as the dominant word
-        for x in reader:
-            if x[0] in textArray:
-                verbs.append(x[0])
+    for words in textArray:
+        driver.get("https://www.google.com/search?q=is+{word}+a+verb".format(word = words))
 
-        # The two different returns are which of the elements are verbs in the string
-            # The second one returning the dominant verb
-        return verbs, verbs[0]
+        try:
+            if driver.find_element(By.CSS_SELECTOR, "[class*='YrbPuc']").text == "verb":
+                verbs.append(driver.find_element(By.CSS_SELECTOR, "[class*='YrbPuc']").text == "verb")
+        except:
+            continue
+
+    # The two different returns are which of the elements are verbs in the string
+        # The second one returning the dominant verb
+    return verbs, verbs[0]
 
 # Function used to find the subject of the sentance
 def findSubject(wordsArray, filteredWords, positionOfRoot):
