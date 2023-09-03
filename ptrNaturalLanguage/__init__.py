@@ -268,6 +268,9 @@ def sentimentDetermination(wordsArray):
 
     #print(classifier.predict([[score]]))
 
+# Function used to check that no numbers are in the string / word
+def checkIfNumInString(string):
+    return any(char.isdigit() for char in string)
 
 # Function used for tokenization
     # AKA splitting the sentances into words
