@@ -333,17 +333,16 @@ def tokenization(inputText):
 
 #tokenization("Tesla stock is overvalued")
 
-# Function used to train the NPL model
-    # Data - Pandas DataFrame
-def trainModel(data):
-    # Pass the data into the training csv
-    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "a") as fileToAppendTo:
-        writer = csv.writer(fileToAppendTo)
+"""
+# Pass the data into the training csv
+with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "a") as fileToAppendTo:
+    writer = csv.writer(fileToAppendTo)
 
-        # For loop used to iterate over the parameter containing the dataframe
-            # This will make it so that we write the user specified data to the training csv
-        for x in range(len(data)):
-            writer.writerow[list(data.iloc[x])]
+    # For loop used to iterate over the parameter containing the dataframe
+        # This will make it so that we write the user specified data to the training csv
+    for x in range(len(data)):
+        writer.writerow[list(data.iloc[x])]
+"""
 
 # Function used to clear the training model CSV file
     # This makes it so that it can then be re-used later for different NPL issues
