@@ -6,6 +6,15 @@ import requests
 from requests_html import HTMLSession
 # Import module for web scraping
 from bs4 import BeautifulSoup
+# For Training of K-Nearest Neighbor
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+# Used to import the sentiment scoreboard for the text analyzer
+from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
+# Used for reading Reddit Posts
+from selenium import webdriver
+from selenium.webdriver.common.by import By
 
 import csv
 import pandas as pd
