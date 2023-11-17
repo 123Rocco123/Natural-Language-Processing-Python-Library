@@ -15,12 +15,15 @@ from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 # Used for reading Reddit Posts
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+#
+from multiprocessing import Pool
 
-import csv
-import pandas as pd
-import ptrFinance
-import time
 import os
+import csv
+import math
+import time
+import ptrFinance
+import pandas as pd
 
 # Function Used to find the articles that contain the keywords in their titles, returning the titles with the links - O(n^2)
     # Parameters are the stock name and the string array containg the titles of the articles
