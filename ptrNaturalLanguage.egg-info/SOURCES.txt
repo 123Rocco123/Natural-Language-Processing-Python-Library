@@ -4,6 +4,10 @@ MANIFEST.in
 README.txt
 setup.py
 ptrNaturalLanguage/__init__.py
+ptrNaturalLanguage/punctuation.csv
+ptrNaturalLanguage/stopWords.csv
+ptrNaturalLanguage/trainedWords.csv
+ptrNaturalLanguage/training.csv
 ptrNaturalLanguage.egg-info/PKG-INFO
 ptrNaturalLanguage.egg-info/SOURCES.txt
 ptrNaturalLanguage.egg-info/dependency_links.txt
