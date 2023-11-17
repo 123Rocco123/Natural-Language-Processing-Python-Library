@@ -161,233 +161,160 @@ def positiveOrNegativeString(string, positiveArray, negativeArray):
 
 # Machine Learning Section
 
-# Function used for "sentence segmentation"
-    # AKA Splitting the sentances
-def sentenceSegmentation(inputText):
-    # Used to split up the inputted text into seperate sentances
-    seperatedText = inputText.split(".")
-    # Used to remove empty string from the returned array
-    seperatedText = [x for x in seperatedText if x != ""]
-    return seperatedText
+# Function used to remove punctuation
+def removePunctuation(sentance):
+    punctuation = list(pd.read_csv("{currentDir}/punctuation.csv".format(currentDir = mainFile))["symbol"])
 
-# Function used to change the words into their most basic form of the word
-def lemmazation(wordsArray):
-    # Used to contain the lemmanized words with thein non lemmanized versions
-    returnArray = {}
+    # Replace Comma
+    sentance = sentance.replace(",", " ")
+    # Replace Quote
+    sentance = sentance.replace("\"", " ")
 
-    for word in wordsArray:
+    for x in punctuation:
+        if x in sentance:
+            sentance = sentance.replace(x, " ")
+
+    return sentance
+
+# Function used to remove numbers
+def removeNumbers(sentance):
+    filteredSentance = ""
+
+    for x in sentance.split(" "):
         try:
-            session = HTMLSession()
-            requests = session.get("https://dictionary.cambridge.org/dictionary/english/{word}".format(word = word)).text
-            soup = BeautifulSoup(requests, "html5lib")
+            float(x)
+            continue
+        except ValueError:
+            filteredSentance += x
+            filteredSentance += " "
 
-            #print(word)
+    return filteredSentance
 
-            # Used in case of a stock name
-            try:
-                if soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}) != None:
-                    returnArray[word] = soup.find("div", {"class" : "def ddef_d db"}).find("span", {"class" : "x-h dx-h"}).text
-            except:
-                pass
-                #print("test")
-        except:
+# Function used to get rid of all stop words in the sentance
+def ridStopWords(sentance):
+    stopWords = list(pd.read_csv("{currentDir}/stopWords.csv".format(currentDir = mainFile))["Stop Words"])
+    #
+    sentance = removePunctuation(sentance)
+    sentance = removeNumbers(sentance)
+
+    filteredSentance = []
+
+    # Iterate over the setnance
+    for words in [x for x in sentance.split(" ") if x != ""]:
+        if words.lower() not in stopWords:
+            filteredSentance.append(words.lower())
+        else:
             continue
 
-    return returnArray
+    return filteredSentance
 
-# Function has the goal of identifying the main verb of a sentence
-def findMainVerb(textArray):
-    chrome_options = Options()
-    chrome_options.add_argument('--headless')
+# Function used to add a score to the words
+def determineWordsScore(filteredSentances):
+    sentimentDictionary = {}
 
-    # Function used to scrape information from the main page
-    driver = webdriver.Chrome(options = chrome_options)
-    # Used to contain the verbs that are in the input text
-    verbs = []
-
-    for words in textArray:
-        driver.get("https://www.google.com/search?q=is+{word}+a+verb".format(word = words))
-
-        try:
-            if driver.find_element(By.CSS_SELECTOR, "[class*='YrbPuc']").text == "verb":
-                verbs.append(driver.find_element(By.CSS_SELECTOR, "[class*='YrbPuc']").text == "verb")
-        except:
-            continue
-
-    # The two different returns are which of the elements are verbs in the string
-        # The second one returning the dominant verb
-    return verbs, verbs[0]
-
-# Function used to find the subject of the sentance
-def findSubject(wordsArray, filteredWords, positionOfRoot):
-    for x in wordsArray:
-        if wordsArray.index(x) < positionOfRoot and x in filteredWords:
-            return x
-
-# Function is used to return if the sentance is positive or negative
-def sentimentDetermination(wordsArray):
-    score = 0
-
-    for x in wordsArray:
-        for letters in x:
-            score += ord(letters)
-
-    scoreAndClassificationDF = pd.DataFrame(columns = ["Score", "Positive", "Negative", "Neutral"])
-
-    # Open function used to read the training data
-    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "r") as sentimentDeterminationTraining:
-        reader = csv.reader(sentimentDeterminationTraining)
-        next(reader)
-
-        for x in reader:
-            score = 0
-            for word in x[0].split(" "):
-                for letter in word:
-                    score += ord(letter)
-
-            # Appends the new row to the DataFrame
-            scoreAndClassificationDF = scoreAndClassificationDF.append({"Score" : score,
-                                                                        "Positive" : x[1],
-                                                                        "Negative" : x[2],
-                                                                        "Neutral" : x[3]
-                                                                        },
-
-                                                                        ignore_index = True)
-
-    x = scoreAndClassificationDF[["Score"]]
-    y = scoreAndClassificationDF[["Positive", "Neutral","Negative"]]
-
-    # Used to contain our test and train data
-    x_train, x_test, y_train, y_test = train_test_split(x,y,train_size=0.8, test_size=0.2)
-
-    # StandardScaler used to normalize the data
-    scaler = StandardScaler()
-    scaler.fit(x_train)
-
-    x_train = scaler.transform(x_train)
-    x_test = scaler.transform(x_test)
-
-    # Used to contain the algorithm for determining the nearest neighbor
-    classifier = KNeighborsClassifier(n_neighbors = 5)
-    classifier.fit(x_train, y_train)
-
-    #print(classifier.predict([[score]]))
-
-# Function used to check that no numbers are in the string / word
-def checkIfNumInString(string):
-    return any(char.isdigit() for char in string)
-
-# Function used for tokenization
-    # AKA splitting the sentances into words
-def tokenization(inputText):
-    stopWords = pd.read_csv("{currentDir}/ptrNaturalLanguage/stopWords.csv".format(currentDir = os.getcwd()))
-    stopWords = list(stopWords["Stop Words"])
-
-    for x in sentenceSegmentation(inputText):
-        # Used to split up the inputted text into seperate words
-        words = x.split(" ")
-        # Used to remove empty string from the returned array
-            # We also make sure that there is no percentage in the word
-            # As well as making sure that we remove any and all strings that contain numbers as they can't feasibly have sentiment
-        words = [x for x in words if x != "" and "%" not in x and checkIfNumInString(x) == False]
-        # Used to contain the words that passed the stopWords for loop
-        filteredWords = []
-        filteredWordsType = []
-
-        # Used to move all of the words that we currently have in the array to their most basic form
-        lemmaOfWords = lemmazation(words)
-
-        for lemma in lemmaOfWords:
-            words[words.index(lemma)] = lemmaOfWords[lemma]
-
-        # Used to classify the words
-        for wordsToSearch in words:
-            # Condition is used to make sure that we get rid of the "stopWords"
-            if wordsToSearch.lower() in stopWords:
-                continue
-            else:
-                # Used in case there is some issue with connecting to the dictionary for any reason
-                try:
-                    # Used to check for the word on the dictionary
-                    session = HTMLSession()
-                    requests = session.get("https://dictionary.cambridge.org/dictionary/english/{searchedWord}".format(searchedWord = wordsToSearch)).text
-                    soup = BeautifulSoup(requests, "html5lib")
-
-                    try:
-                        filteredWords.append(wordsToSearch)
-                        filteredWordsType.append(soup.find("span", {"class" : "pos dpos"}).text)
-                    except:
-                        pass
-
-                    del session
-                    del requests
-                    del soup
-
-                except:
-                    continue
-
-        return filteredWords
-
-        # Variables used to contain the root of the sentance and the verbs
-        #verbs, root = findMainVerb(words)
-        # Variable used to contain the subject of the sentance
-        #subject = findSubject(words, filteredWords, words.index(root))
-
-        # Pass in the training data to the function for classification of the sentence sentiment
-        #sentimentDetermination(filteredWords)
-
-#tokenization("Tesla stock is overvalued")
-
-"""
-# Pass the data into the training csv
-with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "a") as fileToAppendTo:
-    writer = csv.writer(fileToAppendTo)
-
-    # For loop used to iterate over the parameter containing the dataframe
-        # This will make it so that we write the user specified data to the training csv
-    for x in range(len(data)):
-        writer.writerow[list(data.iloc[x])]
-"""
-
-# Function used to clear the training model CSV file
-    # This makes it so that it can then be re-used later for different NPL issues
-def clearTraining():
-    # Used to open the file and set it to its header values only
-        # It does this by using the "w+" write mode, truncating the file (bringing it to length 0)
-    with open("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), "w+") as resetFile:
-        writer = csv.writer(resetFile)
-
-        writer.writerow(['sentance','positive','negative','neutral'])
-
-# Function used to train the model
-    # dataFrame parameter is used to contain the CSV file with the string and the "supervised" column
-def train(dataFrame):
-    # Dictionary used to contain the word with its frequency and overall score
-    wordAndScore = {}
-
-    # Used to iterate over the
-    for x in dataFrame.index:
-        print(dataFrame["sentance"][x])
-        for words in tokenization(dataFrame["sentance"][x]):
-            try:
-                if dataFrame["positive"][x] == 1:
-                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1] + 0.1]
-
-                    wordAndScore[words] = newArray
-
-                elif dataFrame["negative"][x] == 1:
-                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1] - 0.1]
-
-                    wordAndScore[words] = newArray
-
+    for x in filteredSentances:
+        # Check if the sentiment is positive
+        if x[1] == [1,0,0]:
+            for words in x[0]:
+                if words in sentimentDictionary:
+                    sentimentDictionary[words] += 0.005
                 else:
-                    newArray = [wordAndScore[words][0] + 1, wordAndScore[words][1]]
+                    sentimentDictionary[words] = 0.505
 
-                    wordAndScore[words] = newArray
+        # Check if the sentiment is negative
+        elif x[1] == [0,1,0]:
+            for words in x[0]:
+                if words in sentimentDictionary:
+                    sentimentDictionary[words] -= 0.005
+                else:
+                    sentimentDictionary[words] = 0.495
 
+        # Check if the sentiment is neutral
+        elif x[1] == [0,0,1]:
+            for words in x[0]:
+                if words not in sentimentDictionary:
+                    sentimentDictionary[words] = 0.5
+
+    return sentimentDictionary
+
+# Function used to check the recorded sentiment of the sentence
+def train(dataFrameRow):
+    filteredSentances = []
+
+    for x in range(len(dataFrameRow)):
+        filteredSentance = ridStopWords(dataFrameRow["sentance"][x])
+
+        filteredSentances.append([filteredSentance, list(dataFrameRow.loc[x, ["positive","negative","neutral"]])])
+
+    saveSentiments(determineWordsScore(filteredSentances))
+
+# Function used to write the
+def saveSentiments(sentimentDictionary):
+    with open("{currentDir}/trainedWords.csv".format(currentDir = mainFile), "w", newline = "") as fileToWrite:
+        writer = csv.writer(fileToWrite)
+
+        writer.writerow(["word", "sentiment score"])
+
+        for x in sentimentDictionary:
+            try:
+                writer.writerow([x, sentimentDictionary[x]])
             except:
-                wordAndScore[words] = [1, 0.5]
+                continue
 
-    print(wordAndScore)
+#
+def checkSentiment(sentance):
+    stopWords = list(pd.read_csv("{currentDir}/stopWords.csv".format(currentDir = mainFile))["Stop Words"])
+    #
+    sentance = removePunctuation(sentance)
+    sentance = removeNumbers(sentance)
 
-train(pd.read_csv("C:/Users/dodob/OneDrive/Desktop/GitHubFiles/Natural-Language-Processing-Python-Library/ptrNaturalLanguage/training.csv", encoding = "latin-1"))
+    filteredSentance = []
+
+    # Iterate over the setnance
+    for words in [x for x in sentance.split(" ") if x != ""]:
+        if words.lower() not in stopWords:
+            filteredSentance.append(words.lower())
+        else:
+            continue
+
+    del stopWords, sentance
+
+    trainedWordsFilePath = os.path.join(mainFile, 'trainedWords.csv')
+
+    trainedWords = pd.read_csv(trainedWordsFilePath, encoding='latin1')
+
+    sentimentSum = 0
+
+    #
+    for x in filteredSentance:
+        #
+        if x in list(trainedWords["word"]):
+            result = trainedWords[trainedWords["word"] == x]
+
+            sentimentSum += (float(result["sentiment score"]))
+        #
+        else:
+            sentimentSum += 0.5
+
+    try:
+        sentenceSentiment = sentimentSum / len(filteredSentance)
+
+    except ZeroDivisionError:
+        return "Neutral", 0.5
+
+    #print(sentenceSentiment)
+
+    if sentenceSentiment < 0.4:
+        return "Negative", sentenceSentiment
+
+    elif sentenceSentiment < 0.45 and sentenceSentiment > 0.4:
+        return "Slightly Negative", sentenceSentiment
+
+    elif sentenceSentiment > 0.6:
+        return "Positive", sentenceSentiment
+
+    elif sentenceSentiment <= 0.6 and sentenceSentiment > 0.55:
+        return "Slightly Positive", sentenceSentiment
+
+    else:
+        return "Neutral", sentenceSentiment
