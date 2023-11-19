@@ -248,7 +248,7 @@ def train(dataFrameRow):
 
     saveSentiments(determineWordsScore(filteredSentances))
 
-# Function used to write the
+# Function used to write the sentiment of the words to a CSV file
 def saveSentiments(sentimentDictionary):
     with open("{currentDir}/trainedWords.csv".format(currentDir = mainFile), "w", newline = "") as fileToWrite:
         writer = csv.writer(fileToWrite)
