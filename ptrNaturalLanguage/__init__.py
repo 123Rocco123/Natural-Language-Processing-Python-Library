@@ -318,3 +318,5 @@ def checkSentiment(sentance):
 
     else:
         return "Neutral", sentenceSentiment
+
+#train(pd.read_csv("{currentDir}/ptrNaturalLanguage/training.csv".format(currentDir = os.getcwd()), encoding = "latin-1"))
