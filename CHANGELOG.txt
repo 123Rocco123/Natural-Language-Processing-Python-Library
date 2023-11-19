@@ -1,5 +1,8 @@
 Change Log
 ==========
+0.0.17 (11/19/2023)
+trainedWords and training CSV files update
+
 0.0.16 (10/29/2023)
 Sentiment boundaries fix and failsafe
 
