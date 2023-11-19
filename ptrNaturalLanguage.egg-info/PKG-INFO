@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: ptrNaturalLanguage
-Version: 0.0.16
+Version: 0.0.17
 Summary: Natural Language Processing Library
 Home-page: 
 Author: Rocco Pio Maria Petruccio
@@ -23,6 +23,9 @@ GitHub Repository Link: https://github.com/123Rocco123/Natural-Language-Processi
 
 Change Log
 ==========
+0.0.17 (11/19/2023)
+trainedWords and training CSV files update
+
 0.0.16 (10/29/2023)
 Sentiment boundaries fix and failsafe
 
